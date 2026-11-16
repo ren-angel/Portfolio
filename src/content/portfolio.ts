@@ -393,7 +393,7 @@ export const projects: Project[] = [
   {
     slug: "portfolio-desktop", category: "fullstack", tone: "pink", icon: "layers",
     tags: ["React", "TypeScript", "Cloudflare Workers", "D1 (SQLite)", "Turnstile", "GitHub Actions"],
-    github: "https://github.com/ren-angel/Portfolio", live: null, thumb: null,
+    github: "https://github.com/ren-angel/Portfolio", live: "https://ren-angel.github.io/Portfolio/", thumb: null,
     gallery: [portfolioHome, portfolioTabs, portfolioFeats],
     text: {
       en: {
