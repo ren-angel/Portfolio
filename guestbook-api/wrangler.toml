@@ -14,7 +14,7 @@ ALLOWED_ORIGINS = "https://ren-angel.github.io,http://localhost:5173,http://loca
 DAILY_ENTRY_LIMIT = "300"
 
 [[d1_databases]]
-binding = "guestbook"
+binding = "DB"
 database_name = "guestbook"
 # Replace with the id printed by `npx wrangler d1 create guestbook` (local dev works without it).
 database_id = "8b9449eb-8c66-4cde-879e-29f707ca153f"
