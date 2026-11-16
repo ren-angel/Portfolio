@@ -1,0 +1,26 @@
+# Cloudflare Worker for the portfolio guestbook. Free plan only: no paid products are used.
+name = "guestbook"
+main = "src/index.ts"
+compatibility_date = "2026-09-01"
+
+# Free plan: keep usage logs off by default (turn on in the dashboard if you need to debug).
+[observability]
+enabled = false
+
+[vars]
+# Browser origins allowed to POST. Add your custom domain here if you ever use one.
+ALLOWED_ORIGINS = "https://ren-angel.github.io,http://localhost:5173,http://localhost:4173"
+# Safety valve for the free tier: max new entries per UTC day across all visitors.
+DAILY_ENTRY_LIMIT = "300"
+
+[[d1_databases]]
+binding = "guestbook"
+database_name = "guestbook"
+# Replace with the id printed by `npx wrangler d1 create guestbook` (local dev works without it).
+database_id = "8b9449eb-8c66-4cde-879e-29f707ca153f"
+migrations_dir = "migrations"
+
+# Secrets (never commit these; set with `npx wrangler secret put <NAME>`):
+#   TURNSTILE_SECRET  – from the Turnstile widget you create in the Cloudflare dashboard
+#   IP_HASH_SALT      – any long random string, e.g. `openssl rand -hex 32`
+# For local dev, copy .dev.vars.example to .dev.vars.

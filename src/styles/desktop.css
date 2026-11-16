@@ -4,16 +4,34 @@
 
 @layer base {
   :root {
-    /* Kawaii design tokens — edit here to re-theme the whole desktop */
+    /* Design tokens - every colour in the UI comes from here.
+       Night theme overrides are in [data-theme="night"] below. */
     --k-bg: #FFF7FA;
+    --k-surface: #FFFFFF;
     --k-pink: #F6B8D0;
     --k-blue: #B9DEFA;
     --k-lav: #DCCBFA;
     --k-mint: #C6EBDD;
     --k-cream: #FFF0DA;
     --k-peach: #FFD9C0;
+    --k-pink-soft: #FFE3EE;
+    --k-blue-soft: #DDEFFC;
+    --k-lav-soft: #EFE6FD;
+    --k-mint-soft: #E6F7F0;
+    --k-peach-soft: #FFF0E6;
+    --k-cream-soft: #FFF9EF;
     --k-text: #4A3B52;
     --k-outline: #A98DAE;
+    --k-shadow: 169 141 174;          /* rgb channels, used as rgb(var(--k-shadow) / .3) */
+    --k-paper: #FFFDF8;
+    --k-paper-line: #EADFF2;
+    --k-sparkle: rgba(255, 255, 255, .9);
+    --k-pattern: rgba(220, 203, 250, .35);
+    --k-glow-1: rgba(185, 222, 250, .45);
+    --k-glow-2: rgba(246, 184, 208, .4);
+    --k-sky-top: #E3F2FD;
+    --k-sky-bottom: #FFE3EE;
+    --k-holo: linear-gradient(135deg, #F6B8D0, #B9DEFA 35%, #C6EBDD 60%, #DCCBFA);
 
     --background: 336 100% 98%;
     --foreground: 284 16% 26%;
@@ -53,6 +71,39 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
+  /* Night: a cozy indigo sky. Pastels become dusky versions of themselves (not inverted),
+     so light text keeps ≥4.5:1 contrast on every accent colour. */
+  [data-theme="night"] {
+    --k-bg: #1B1730;
+    --k-surface: #2A2444;
+    --k-pink: #8E4F86;
+    --k-blue: #3D5E99;
+    --k-lav: #5F4C9C;
+    --k-mint: #2F6D64;
+    --k-cream: #6A5672;
+    --k-peach: #8A5A55;
+    --k-pink-soft: #362842;
+    --k-blue-soft: #232C4B;
+    --k-lav-soft: #2D2650;
+    --k-mint-soft: #1F343D;
+    --k-peach-soft: #35283A;
+    --k-cream-soft: #2E2840;
+    --k-text: #F4ECFF;
+    --k-outline: #9A86C4;
+    --k-shadow: 6 4 18;
+    --k-paper: #2B2546;
+    --k-paper-line: #3B3360;
+    --k-sparkle: rgba(255, 255, 255, .5);
+    --k-pattern: rgba(154, 134, 196, .13);
+    --k-glow-1: rgba(95, 76, 156, .5);
+    --k-glow-2: rgba(142, 79, 134, .3);
+    --k-sky-top: #141129;
+    --k-sky-bottom: #33244A;
+    --k-holo: linear-gradient(135deg, #8E4F86, #3D5E99 35%, #2F6D64 60%, #5F4C9C);
+    --background: 250 35% 14%;
+    --foreground: 270 100% 96%;
+  }
 }
 
 @layer base {
@@ -61,7 +112,9 @@
   }
   html, body { height: 100%; }
   body {
-    @apply bg-background text-foreground font-body;
+    @apply font-body;
+    background-color: var(--k-bg);
+    color: var(--k-text);
     font-size: 18px;
     line-height: 1.6;
     overscroll-behavior: none;
@@ -75,24 +128,77 @@
 
 /* ---------- illustration helpers ---------- */
 .sticker {
-  filter: drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff) drop-shadow(0 4px 6px rgba(169, 141, 174, 0.25));
+  filter: drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff) drop-shadow(0 4px 6px rgb(var(--k-shadow) / .25));
 }
 .paper {
-  background-color: #fffdf8;
-  background-image: repeating-linear-gradient(transparent 0 31px, #eadff2 31px 32px);
+  background-color: var(--k-paper);
+  background-image: repeating-linear-gradient(transparent 0 31px, var(--k-paper-line) 31px 32px);
   background-position: 0 14px;
 }
-.grid-bg {
+/* ---------- wallpapers (picked in Settings; html[data-wallpaper]) ----------
+   Each wallpaper only sets --wp-image/--wp-size, so a preview tile can show another
+   wallpaper locally with data-wp="…". */
+:root, [data-wp="grid"] {
+  --wp-image:
+    linear-gradient(var(--k-pattern) 1px, transparent 1px),
+    linear-gradient(90deg, var(--k-pattern) 1px, transparent 1px),
+    radial-gradient(circle at 20% 15%, var(--k-glow-1), transparent 45%),
+    radial-gradient(circle at 85% 85%, var(--k-glow-2), transparent 45%);
+  --wp-size: 36px 36px, 36px 36px, auto, auto;
+}
+:root[data-wallpaper="dots"], [data-wp="dots"] {
+  --wp-image:
+    radial-gradient(var(--k-pattern) 2.5px, transparent 3px),
+    radial-gradient(circle at 20% 15%, var(--k-glow-1), transparent 45%),
+    radial-gradient(circle at 85% 85%, var(--k-glow-2), transparent 45%);
+  --wp-size: 26px 26px, auto, auto;
+}
+:root[data-wallpaper="checker"], [data-wp="checker"] {
+  --wp-image:
+    conic-gradient(var(--k-pattern) 25%, transparent 0 50%, var(--k-pattern) 0 75%, transparent 0),
+    radial-gradient(circle at 20% 15%, var(--k-glow-1), transparent 45%),
+    radial-gradient(circle at 85% 85%, var(--k-glow-2), transparent 45%);
+  --wp-size: 56px 56px, auto, auto;
+}
+:root[data-wallpaper="sky"], [data-wp="sky"] {
+  --wp-image:
+    radial-gradient(circle at 20% 15%, var(--k-glow-1), transparent 45%),
+    radial-gradient(circle at 85% 85%, var(--k-glow-2), transparent 45%),
+    linear-gradient(180deg, var(--k-sky-top), var(--k-sky-bottom));
+  --wp-size: auto, auto, auto;
+}
+.wallpaper {
   background-color: var(--k-bg);
+  background-image: var(--wp-image);
+  background-size: var(--wp-size);
+}
+/* Night sky: two fixed layers of tiny stars (static, so it costs nothing to render). */
+.night-stars {
   background-image:
-    linear-gradient(rgba(220, 203, 250, 0.35) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(220, 203, 250, 0.35) 1px, transparent 1px),
-    radial-gradient(circle at 20% 15%, rgba(185, 222, 250, 0.45), transparent 45%),
-    radial-gradient(circle at 85% 85%, rgba(246, 184, 208, 0.4), transparent 45%);
-  background-size: 36px 36px, 36px 36px, auto, auto;
+    radial-gradient(1.5px 1.5px at 12% 18%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 28% 62%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 47% 12%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 63% 44%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 81% 22%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 92% 68%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 36% 88%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 72% 82%, #fff 50%, transparent 51%);
+  background-size: 420px 420px;
+  opacity: .55;
+}
+.night-stars.far { background-size: 260px 260px; opacity: .3; background-position: 90px 140px; }
+@keyframes shoot {
+  0%, 92% { transform: translate(0, 0) rotate(-30deg); opacity: 0; }
+  93% { opacity: 1; }
+  100% { transform: translate(-340px, 200px) rotate(-30deg); opacity: 0; }
+}
+.shooting-star {
+  width: 90px; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, #fff, transparent);
+  animation: shoot 14s linear infinite;
 }
 .titlebar-dots {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.7) 1.5px, transparent 1.6px);
+  background-image: radial-gradient(var(--k-sparkle) 1.5px, transparent 1.6px);
   background-size: 10px 10px;
 }
 .film {
@@ -103,23 +209,23 @@
 }
 .glitter {
   background-image:
-    radial-gradient(circle at 20% 25%, rgba(255,255,255,.9) 1.5px, transparent 2px),
-    radial-gradient(circle at 70% 60%, rgba(255,255,255,.9) 1.5px, transparent 2px),
-    radial-gradient(circle at 45% 85%, rgba(255,255,255,.9) 1px, transparent 1.5px);
+    radial-gradient(circle at 20% 25%, var(--k-sparkle) 1.5px, transparent 2px),
+    radial-gradient(circle at 70% 60%, var(--k-sparkle) 1.5px, transparent 2px),
+    radial-gradient(circle at 45% 85%, var(--k-sparkle) 1px, transparent 1.5px);
 }
 .holo {
-  background-image: linear-gradient(135deg, #F6B8D0, #B9DEFA 35%, #C6EBDD 60%, #DCCBFA);
+  background-image: var(--k-holo);
   background-size: 200% 200%;
   animation: shimmer 6s ease-in-out infinite;
 }
 .k-scroll { scrollbar-width: thin; scrollbar-color: var(--k-pink) transparent; }
 .k-scroll::-webkit-scrollbar { width: 10px; height: 10px; }
-.k-scroll::-webkit-scrollbar-thumb { background: var(--k-pink); border-radius: 999px; border: 2px solid #fff7fa; }
+.k-scroll::-webkit-scrollbar-thumb { background: var(--k-pink); border-radius: 999px; border: 2px solid var(--k-bg); }
 
 .kbtn {
   display: inline-flex; align-items: center; gap: 0.4rem;
   padding: 0.4rem 0.9rem; border-radius: 14px;
-  border: 2px solid var(--k-outline); background: #fff; color: var(--k-text);
+  border: 2px solid var(--k-outline); background: var(--k-surface); color: var(--k-text);
   font-family: var(--font-heading); font-weight: 500; font-size: 0.95rem;
   box-shadow: 0 3px 0 var(--k-outline);
   transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
@@ -127,7 +233,28 @@
 }
 .kbtn:hover { transform: translateY(-2px) rotate(-1deg); box-shadow: 0 5px 0 var(--k-outline); background: var(--k-cream); }
 .kbtn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--k-outline); }
-.kbtn[aria-disabled="true"] { opacity: .55; cursor: not-allowed; }
+.kbtn[aria-disabled="true"], .kbtn:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+
+/* Title-bar control tooltips (pointer devices only; touch users get the aria-label). */
+@media (hover: hover) {
+  .kctl[data-tip] { position: relative; }
+  .kctl[data-tip]::after {
+    content: attr(data-tip);
+    position: absolute; top: calc(100% + 9px); left: 50%; z-index: 5;
+    transform: translateX(-50%) translateY(-3px); opacity: 0; pointer-events: none; white-space: nowrap;
+    padding: 2px 9px; border-radius: 999px; border: 2px solid var(--k-outline);
+    background: var(--k-surface); color: var(--k-text);
+    font: 500 12px/1.4 var(--font-heading);
+    box-shadow: 0 3px 0 rgb(var(--k-shadow) / .35);
+    transition: opacity .15s ease, transform .15s ease;
+  }
+  .kctl[data-tip]:last-child::after { left: auto; right: -4px; transform: translateY(-3px); }
+  .kctl[data-tip]:hover::after, .kctl[data-tip]:focus-visible::after { opacity: 1; transform: translateX(-50%); }
+  .kctl[data-tip]:last-child:hover::after, .kctl[data-tip]:last-child:focus-visible::after { transform: none; }
+}
+
+/* Theme switch: colours glide instead of snapping. */
+html.theme-fade * { transition: background-color .35s ease, border-color .35s ease, color .35s ease !important; }
 
 /* ---------- animations ---------- */
 @keyframes twinkle { 0%,100% { opacity:.35; transform: scale(.8) rotate(0deg); } 50% { opacity:1; transform: scale(1.15) rotate(12deg); } }
@@ -142,15 +269,20 @@
 @keyframes barslide { from { transform: translateX(-100%); } to { transform: translateX(260%); } }
 @keyframes popin { 0% { transform: scale(.3) rotate(-20deg); } 70% { transform: scale(1.25) rotate(8deg); } 100% { transform: scale(1) rotate(0); } }
 @keyframes shimmer { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-@keyframes bubble { 0% { transform: translateY(0) scale(.6); opacity: 0; } 20% { opacity: .9; } 100% { transform: translateY(-70px) scale(1); opacity: 0; } }
+@keyframes blink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
 
+@keyframes confetti { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotate(540deg); opacity: .8; } }
+.confetti { animation: confetti 3s ease-in both; }
 .twinkle { animation: twinkle 3.2s ease-in-out infinite; }
 .floaty { animation: floaty 5s ease-in-out infinite; }
 .cloud-drift { animation: drift 120s linear infinite; }
 .pop-in { animation: popin .45s ease-out both; }
 .tail-wag { transform-box: fill-box; transform-origin: 0% 100%; animation: wag 2.2s ease-in-out infinite; }
 .bar-anim { animation: barslide 1.4s ease-in-out infinite; }
-.bubble { animation: bubble 2.6s ease-out infinite; }
+.blink { animation: blink 1s steps(1) infinite; }
+/* soft CRT scanlines over the boot screen */
+.crt::after { content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+  background: repeating-linear-gradient(to bottom, transparent 0 2px, rgb(var(--k-shadow) / .1) 2px 3px); }
 .folder-art { animation: idle 3.6s ease-in-out infinite; animation-delay: var(--d, 0s); transform-origin: 50% 90%; }
 .folder-btn:hover .folder-art,
 .folder-btn:focus-visible .folder-art { animation: squash .65s ease-out; }
@@ -181,3 +313,28 @@
 .text-k-outline { color: var(--k-outline); }
 .fill-k-pink { fill: var(--k-pink); }
 .decoration-k-pink { text-decoration-color: var(--k-pink); }
+.bg-k-surface { background-color: var(--k-surface); }
+.bg-k-surface\/50 { background-color: color-mix(in srgb, var(--k-surface) 50%, transparent); }
+.bg-k-surface\/70 { background-color: color-mix(in srgb, var(--k-surface) 70%, transparent); }
+.bg-k-surface\/80 { background-color: color-mix(in srgb, var(--k-surface) 80%, transparent); }
+.bg-k-surface\/90 { background-color: color-mix(in srgb, var(--k-surface) 90%, transparent); }
+.bg-k-surface\/95 { background-color: color-mix(in srgb, var(--k-surface) 95%, transparent); }
+.hover\:bg-k-surface\/50:hover { background-color: color-mix(in srgb, var(--k-surface) 50%, transparent); }
+.hover\:bg-k-surface:hover { background-color: var(--k-surface); }
+.focus-visible\:bg-k-surface:focus-visible { background-color: var(--k-surface); }
+.bg-k-pink-soft { background-color: var(--k-pink-soft); }
+.bg-k-blue-soft { background-color: var(--k-blue-soft); }
+.bg-k-lav-soft { background-color: var(--k-lav-soft); }
+.bg-k-mint-soft { background-color: var(--k-mint-soft); }
+.bg-k-peach-soft { background-color: var(--k-peach-soft); }
+.bg-k-cream-soft { background-color: var(--k-cream-soft); }
+.hover\:bg-k-pink:hover { background-color: var(--k-pink); }
+.hover\:bg-k-mint:hover { background-color: var(--k-mint); }
+.hover\:bg-k-cream:hover { background-color: var(--k-cream); }
+.border-k-bg { border-color: var(--k-bg); }
+.text-k-pink { color: var(--k-pink); }
+.bg-k-text { background-color: var(--k-text); }
+.bg-k-outline { background-color: var(--k-outline); }
+.border-k-text { border-color: var(--k-text); }
+.border-k-outline\/40 { border-color: color-mix(in srgb, var(--k-outline) 40%, transparent); }
+.hover\:bg-k-lav-soft:hover { background-color: var(--k-lav-soft); }

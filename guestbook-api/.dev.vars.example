@@ -1,0 +1,6 @@
+# Local development only. Copy to .dev.vars (git-ignored).
+# This is Cloudflare's official *test* secret that always passes. Never use it in production.
+TURNSTILE_SECRET=1x0000000000000000000000000000000AA
+IP_HASH_SALT=local-dev-salt-change-me
+# Your Inbox password for local dev (must be ≥32 characters).
+ADMIN_TOKEN=local-dev-admin-token-0123456789abcdef

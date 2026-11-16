@@ -9,7 +9,7 @@ const Ctx = createContext<{
 
 function savedLanguage(): Language {
   try {
-    const saved = localStorage.getItem("kawaii-lang");
+    const saved = localStorage.getItem("lang");
     if (saved === "pt" || saved === "ja") return saved;
   } catch { /* The desktop also works when browser storage is disabled. */ }
   return "en";
@@ -23,7 +23,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   function setLang(language: Language) {
     setLangState(language);
-    try { localStorage.setItem("kawaii-lang", language); } catch { /* Session only. */ }
+    try { localStorage.setItem("lang", language); } catch { /* Session only. */ }
   }
   return <Ctx.Provider value={{ lang, t: translations[lang], setLang }}>{children}</Ctx.Provider>;
 }
