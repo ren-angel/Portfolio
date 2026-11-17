@@ -148,7 +148,7 @@ export interface Project {
   slug: string;
   category: "backend" | "fullstack" | "frontend" | "devops" | "mobile";
   tone: Tone;
-  icon: "server" | "layers" | "palette" | "cloud" | "glasses" | "book" | "mic" | "box";
+  icon: "server" | "layers" | "palette" | "cloud" | "glasses" | "book" | "mic" | "box" | "eye";
   tags: string[];
   /** null = private repo: the button shows as disabled with a "private repo" note. */
   github: string | null;
@@ -218,6 +218,65 @@ export const projects: Project[] = [
           "メールのコードによる二段階認証（任意）。保存するのはコードの HMAC だけ",
           "管理者が登録した資料だけをもとに答え、出典を示すお問い合わせチャットボット（IPごと・1日ごとの上限つき）",
           "CI/CD：クリーンな MySQL でマイグレーションを検証し、GHCR にイメージを公開、SSH でデプロイ。新バージョンが正常に動かなければ自動ロールバック",
+        ],
+      },
+    },
+  },
+  {
+    slug: "olho-magico", category: "fullstack", tone: "blue", icon: "eye",
+    tags: ["Node.js", "MySQL", "React", "React Native", "Azure", "Firebase Cloud Messaging"],
+    github: "https://github.com/ren-angel/Aplicativo-Olho-Magico", live: "https://front-end-olho-magico.vercel.app/", thumb: null,
+    gallery: [],
+    text: {
+      en: {
+        title: "Olho Mágico",
+        short: "A condominium management system connecting the building's staff and its residents.",
+        summary: "Olho Mágico (\"peephole\" in Portuguese) is a team project for managing apartment buildings. Instead of being a social network for neighbours, it focuses on communication between the building and its residents: visitors, deliveries, bookings of shared spaces, notices and other admin work. It has a web version and an Android app for residents. I was on the back-end team with Miguel Pereira and Vinicius Gomes, took care of deploying the project to Azure, and also helped code part of the front-end.",
+        problem: "In many buildings, the doorman, the building manager and the residents still coordinate deliveries, visitors, party-room bookings and notices through paper, intercom calls and chat groups, which makes things easy to lose and hard to control.",
+        solution: "A Node.js API with a MySQL database serves a React website and a React Native app, each user role with its own permissions. Doormen log deliveries and visitors, the building manager approves bookings and announcements and registers which email belongs to which flat, and residents manage their own visitors, vehicles and parcels. Push notifications go out through Firebase Cloud Messaging, and the whole infrastructure is hosted on Azure.",
+        features: [
+          "Three roles (doorman, building manager and resident), each with its own permissions",
+          "Delivery log, with residents picking up parcels using a pickup code",
+          "Visitors and service providers registered by residents, who can enable or disable their entry",
+          "Bookings of shared spaces like the party room and barbecue area, approved by the building manager",
+          "Notices, renovations, meetings and official building documents published by the building manager",
+          "Resident announcements and internal sales that need the building manager's approval",
+          "Vehicle registration to control who comes in and out",
+          "Android app for residents, with push notifications via Firebase Cloud Messaging",
+        ],
+      },
+      pt: {
+        title: "Olho Mágico",
+        short: "Um sistema de gestão de condomínio que conecta o prédio e os moradores.",
+        summary: "O Olho Mágico é um projeto em equipe para gerenciar condomínios. Em vez de ser uma rede social entre vizinhos, ele foca na comunicação entre o prédio e os moradores: visitantes, encomendas, agendamento de espaços comuns, avisos e outros processos administrativos. Tem uma versão web e um app Android para os moradores. Eu fiz parte da equipe de back-end, junto com o Miguel Pereira e o Vinicius Gomes, cuidei do deploy do projeto na Azure e também ajudei a programar uma parte do front-end.",
+        problem: "Em muitos prédios, porteiro, síndico e moradores ainda combinam encomendas, visitas, reservas do salão de festas e avisos por papel, interfone e grupos de mensagem, o que faz as coisas se perderem e ficarem difíceis de controlar.",
+        solution: "Uma API em Node.js com banco MySQL atende um site em React e um app em React Native, com permissões próprias para cada tipo de usuário. O porteiro registra encomendas e visitantes, o síndico aprova agendamentos e anúncios e cadastra qual e-mail pertence a cada apartamento, e o morador cuida dos próprios visitantes, veículos e encomendas. As notificações push saem pelo Firebase Cloud Messaging, e toda a infraestrutura fica hospedada na Azure.",
+        features: [
+          "Três papéis (porteiro, síndico e morador), cada um com suas permissões",
+          "Registro de encomendas, retiradas pelo morador com um código de retirada",
+          "Visitantes e prestadores de serviço cadastrados pelo morador, que pode liberar ou bloquear a entrada",
+          "Agendamento de espaços comuns, como salão de festas e churrasqueira, aprovado pelo síndico",
+          "Avisos, reformas, reuniões e documentos oficiais do prédio publicados pelo síndico",
+          "Anúncios e vendas internas dos moradores, que precisam da aprovação do síndico",
+          "Cadastro de veículos para controlar entradas e saídas",
+          "App Android para moradores, com notificações push pelo Firebase Cloud Messaging",
+        ],
+      },
+      ja: {
+        title: "Olho Mágico",
+        short: "建物の管理側と住民をつなぐマンション管理システム。",
+        summary: "Olho Mágico（ポルトガル語で「ドアスコープ」）は、マンションを管理するためのチームプロジェクトです。住民同士のSNSではなく、建物と住民のあいだの連絡に重点を置いていて、来客、荷物、共用スペースの予約、お知らせなどの管理業務を扱います。Web版と、住民向けの Android アプリがあります。私は Miguel Pereira、Vinicius Gomes と一緒にバックエンドを担当し、Azure へのデプロイも行いました。フロントエンドの一部の実装も手伝いました。",
+        problem: "多くの建物では、管理人・管理組合の代表・住民が、荷物や来客、パーティールームの予約、お知らせを、紙やインターホン、チャットグループでやりとりしていて、情報がなくなりやすく、管理もしにくい状態です。",
+        solution: "Node.js と MySQL のAPIが React のWebサイトと React Native のアプリを支え、ユーザーの種類ごとに権限が分かれています。管理人は荷物と来客を記録し、代表は予約や掲示を承認して、どのメールアドレスがどの部屋の住民かを登録します。住民は自分の来客、車両、荷物を管理できます。プッシュ通知は Firebase Cloud Messaging で送り、インフラはすべて Azure にホストしています。",
+        features: [
+          "管理人・管理組合の代表・住民の3つの権限",
+          "荷物の記録と、受け取りコードを使った住民による受け取り",
+          "住民が来客や業者を登録し、入館を許可・停止できる機能",
+          "パーティールームやバーベキュー場など共用スペースの予約（代表が承認）",
+          "代表によるお知らせ、工事、会議、建物の公式書類の掲載",
+          "代表の承認が必要な、住民の掲示や建物内での販売",
+          "出入りを管理するための車両登録",
+          "Firebase Cloud Messaging のプッシュ通知つき、住民向け Android アプリ",
         ],
       },
     },
