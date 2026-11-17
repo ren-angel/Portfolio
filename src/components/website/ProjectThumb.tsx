@@ -1,9 +1,9 @@
-import { Server, Layers, Palette, Cloud, Glasses, BookOpen, Mic, Box } from "lucide-react";
+import { Server, Layers, Palette, Cloud, Glasses, BookOpen, Mic, Box, Eye } from "lucide-react";
 import { tones, type Project, type Tone } from "@/content/portfolio";
 import { Sparkle, Star } from "./Illustrations";
 
 const ICONS: Record<Project["icon"], typeof Server> = {
-  server: Server, layers: Layers, palette: Palette, cloud: Cloud, glasses: Glasses, book: BookOpen, mic: Mic, box: Box,
+  server: Server, layers: Layers, palette: Palette, cloud: Cloud, glasses: Glasses, book: BookOpen, mic: Mic, box: Box, eye: Eye,
 };
 
 // Project icon / hero. Provide project.thumb (image URL) to replace the illustration.
