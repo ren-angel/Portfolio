@@ -1,6 +1,7 @@
 import type { Language } from "./translations";
 // Real screenshots and a gameplay video. Originals live in design/screenshot-originals (gitignored):
 // these copies are cropped to the page (no browser bar), resized and converted to WebP / H.264.
+import aboutPhoto from "@/assets/me.webp";
 import virteaiHome from "@/assets/projects/virteai-home.webp";
 import virteaiPatient from "@/assets/projects/virteai-pacient.webp";
 import virteaiSession from "@/assets/projects/virteai-sessiondata.webp";
@@ -26,9 +27,9 @@ import modelViewer from "@/assets/projects/model-viewer.webp";
 // Everything here is placeholder content.
 
 export const profile: { name: string; email: string; aboutPhoto: string | null; githubUser: string } = {
-  name: "Daniel \"Ren Angel\" Medrado",
+  name: "Daniel Medrado",
   email: "danielmedradodemorais@gmail.com",
-  aboutPhoto: null, // e.g. an imported image URL - replaces the illustrated cat on About Me
+  aboutPhoto, // src/assets/me.webp (web-sized copy of the original photo)
   githubUser: "ren-angel", // used by the Repos window and the terminal (public GitHub API, no token)
 };
 

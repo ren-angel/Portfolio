@@ -46,7 +46,7 @@ export const translations = {
     },
     home: {
       hello: "Hi, I'm",
-      role: "Back-end developer · full-stack · doodler (sometimes)",
+      role: "Back-end developer · full-stack · doodler (sometimes) · Also known as \"Ren Angel\"",
       intro:
         "Welcome to my little desktop! I build reliable back-end systems, sprinkle in some front-end magic, and draw cats when no one is looking.",
       invite: "Click around, open folders, drag the windows. Make yourself at home ♡",
@@ -287,7 +287,7 @@ export const translations = {
     },
     home: {
       hello: "Oi, eu sou",
-      role: "Desenvolvedor back-end · full-stack · rabiscador (às vezes)",
+      role: "Desenvolvedor back-end · full-stack · desenho (às vezes) · Também conhecido como \"Ren Angel\"",
       intro:
         "Bem-vindo(a) ao meu desktop! Eu construo sistemas back-end confiáveis, coloco uma pitada de magia no front-end e desenho gatinhos quando ninguém está olhando.",
       invite: "Clique por aí, abra pastas, arraste as janelas. Fique à vontade ♡",
@@ -528,7 +528,7 @@ export const translations = {
     },
     home: {
       hello: "はじめまして、",
-      role: "バックエンド開発者 · フルスタック · らくがき好き（たまに）",
+      role: "バックエンド開発者 · フルスタック · らくがき好き（たまに） · 「Ren Angel」としても活動",
       intro:
         "私の小さなデスクトップへようこそ！信頼できるバックエンドを作り、フロントエンドに少しの魔法をかけ、こっそり猫の絵を描いています。",
       invite: "フォルダを開いたり、ウィンドウを動かして、ゆっくりしていってね ♡",

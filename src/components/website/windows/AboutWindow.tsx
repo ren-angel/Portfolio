@@ -25,9 +25,9 @@ export default function AboutWindow() {
       <div className="flex flex-wrap items-start gap-6">
         <figure className="relative w-[190px] shrink-0 rotate-[-3deg] rounded-md border-2 border-k-outline bg-k-surface p-3 pb-6 shadow-[4px_6px_0_rgb(var(--k-shadow)/.35)]">
           <span aria-hidden="true" className="absolute -top-3 left-1/2 h-5 w-16 -translate-x-1/2 rotate-2 rounded-sm bg-k-pink opacity-90" />
-          <div className="grid aspect-square place-items-center rounded " style={{ background: "var(--k-lav-soft)" }}>
+          <div className={`grid place-items-center overflow-hidden rounded ${profile.aboutPhoto ? "aspect-[3/4]" : "aspect-square"}`} style={{ background: "var(--k-lav-soft)" }}>
             {profile.aboutPhoto ? (
-              <img src={profile.aboutPhoto} alt={profile.name} className="h-full w-full object-cover" />
+              <img src={profile.aboutPhoto} alt={profile.name} className="h-full w-full object-cover object-[50%_20%]" />
             ) : (
               <p className="px-3 text-center font-heading text-sm leading-6 text-k-text">
                 <span aria-hidden="true" className="mb-1 block text-2xl">✎</span>
